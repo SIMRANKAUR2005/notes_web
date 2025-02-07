@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 0.3s;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #notesContainer {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .note {
+            background: #ffeb3b;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+            word-wrap: break-word;
+        }
+        .deleteBtn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode .container {
+            background: #444;
+        }
+        .dark-mode .note {
+            background: #777;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notes App</h1>
+        <button id="toggleDarkMode">🌙 Toggle Dark Mode</button>
+        <button id="addNoteBtn">+ Add Note</button>
+        <div id="notesContainer"></div>
+    </div>
+    <script>
+        document.getElementById('addNoteBtn').addEventListener('click', function() {
+            let noteTitle = prompt('Enter note title:');
+            let noteText = prompt('Enter your note:');
+            if (noteTitle && noteText) {
+                let note = document.createElement('div');
+                note.classList.add('note');
+                note.innerHTML = `<strong>${noteTitle}</strong><br>${noteText} <button class='deleteBtn'>X</button>`;
+                document.getElementById('notesContainer').appendChild(note);
+                note.querySelector('.deleteBtn').addEventListener('click', function() {
+                    note.remove();
+                });
+            }
+        });
+        
+        document.getElementById('toggleDarkMode').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
